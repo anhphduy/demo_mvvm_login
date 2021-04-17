@@ -1,1 +1,1 @@
-Base demo login feature with MVVM.
+Application demo login feature with MVVM.
