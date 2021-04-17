@@ -1,1 +1,1 @@
-# demo_mvvm_login
+Base demo login feature with MVVM.
