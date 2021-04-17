@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.demologinmvvm.R
+import com.example.demologinmvvm.ui.authentication.AuthenActivity
 import dagger.android.support.DaggerDialogFragment
 import javax.inject.Inject
 
@@ -62,4 +63,8 @@ abstract class BaseFragment<B : ViewDataBinding, V : ViewModel> : DaggerDialogFr
     }
 
     abstract fun onViewReady(bundle: Bundle?)
+
+    fun getAuthenActivity() : AuthenActivity? {
+        return  if (activity is AuthenActivity) activity as AuthenActivity else null
+    }
 }

@@ -1,49 +1,49 @@
 package com.example.demologinmvvm.ui.splash
 
 import android.content.Intent
-import android.graphics.Color
-import android.os.Build
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
-import android.view.WindowManager
-import androidx.annotation.RequiresApi
-import androidx.fragment.app.FragmentActivity
-import com.example.demologinmvvm.DemoApplication
-import com.example.demologinmvvm.MainActivity
+import androidx.lifecycle.Observer
 import com.example.demologinmvvm.R
-import com.example.demologinmvvm.data.model.User
+import com.example.demologinmvvm.base.BaseActivity
+import com.example.demologinmvvm.databinding.ActivitySplashBinding
+import com.example.demologinmvvm.di.injectViewModel
 import com.example.demologinmvvm.ui.authentication.AuthenActivity
-import com.example.demologinmvvm.utils.LOGIN_USER_KEY
-import com.example.demologinmvvm.utils.PreferenceHelper
+import com.example.demologinmvvm.ui.home.MainActivity
 
-class SplashActivity : FragmentActivity() {
+class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+    override fun injectViewModel() {
+        mViewModel = injectViewModel(viewModelFactory)
+    }
+
+    override fun onViewReady() {
+        observeHadLogin()
         setupSplashTime()
     }
 
-    private fun navigate(){
-        startActivity(Intent(this, AuthenActivity::class.java))
+    override fun getLayoutResourceId(): Int = R.layout.activity_splash
 
-        val user = PreferenceHelper.getObject(LOGIN_USER_KEY, User::class.java)
-
-        if (user == null) {
-            startActivity(Intent(this, AuthenActivity::class.java))
-        } else{
-            startActivity( Intent(this, MainActivity::class.java))
-        }
+    private fun observeHadLogin() {
+        // if had login, go to main screen, if not, go to login screen
+        viewModel.moveCommand.observe(this, Observer { hadLogin ->
+            startActivity(
+                Intent(
+                    this,
+                    if (hadLogin) MainActivity::class.java else AuthenActivity::class.java
+                )
+            )
+        })
     }
 
     private fun setupSplashTime() {
         // show splash screen for 2 seconds
         Handler(Looper.getMainLooper()).postDelayed(Runnable {
-            navigate()
+            // after that navigate to next screen
+            viewModel.navigate()
             finish()
         }, 2000)
     }
 
+    override fun initViewModel(viewModelCallbackManager: SplashViewModel) {}
 }

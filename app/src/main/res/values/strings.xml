@@ -4,10 +4,13 @@
     //common
     <string name="or">OR</string>
     <string name="hello">Hello</string>
+    <string name="txt_loading">Please wait…</string>
+    <string name="ok">OK</string>
 
     //authen
     <string name="log_in">Login</string>
     <string name="login_content">Login to your account</string>
+    <string name="login_success">Login success</string>
     <string name="sign_up">Create new account</string>
     <string name="create">Create</string>
     <string name="email">Email</string>
@@ -23,7 +26,6 @@
     <string name="account_exist">Account already exists</string>
 
     //main
-    <string name="hello_user">Hello, %s</string>
     <string name="log_out">Logout</string>
     <string name="log_out_message">Do you want to logout?</string>
     <string name="yes">Yes</string>

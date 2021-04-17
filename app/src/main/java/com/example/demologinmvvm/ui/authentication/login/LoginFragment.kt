@@ -1,20 +1,21 @@
 package com.example.demologinmvvm.ui.authentication.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.example.demologinmvvm.ui.home.MainActivity
 import com.example.demologinmvvm.R
 import com.example.demologinmvvm.base.BaseFragment
 import com.example.demologinmvvm.common.DataResult
 import com.example.demologinmvvm.databinding.FragmentLoginBinding
 import com.example.demologinmvvm.di.injectViewModel
-import com.example.demologinmvvm.ui.authentication.AuthenActivity
 import com.example.demologinmvvm.ui.authentication.signup.SignupFragment
 import com.example.demologinmvvm.utils.Utils.isValidEmail
 import com.example.demologinmvvm.utils.Utils.isValidPassword
 import com.example.demologinmvvm.utils.addFragment
+import com.example.demologinmvvm.utils.hideKeyboard
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
@@ -32,34 +33,35 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     private fun observeResultLogin() {
         viewModel.moveCommand.observe(viewLifecycleOwner, Observer {
+            val authenActivity = getAuthenActivity() ?: return@Observer
             when (it.status) {
                 DataResult.Status.SUCCESS -> {
+                    //hide loading indicator + navigate to home screen
+                    authenActivity.dismissProgress()
                     if (it.data != null && it.data) {
                         //login success
-                        Toast.makeText(requireContext(), "dang nhap thanh cong", Toast.LENGTH_SHORT).show()
-                    } else {
-                        // login failed
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(authenActivity, MainActivity::class.java))
                     }
-                    //hide loading indicator + handle data
                 }
 
                 DataResult.Status.LOADING -> {
                     //show loading indicator
-                    Toast.makeText(requireContext(), "loading", Toast.LENGTH_SHORT).show()
+                    authenActivity.showProgress()
                 }
 
                 DataResult.Status.ERROR -> {
                     //hide loading indicator + show error
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    authenActivity.dismissProgress()
+                    authenActivity.showErrorDialog(it.message ?: getString(R.string.common_error))
                 }
             }
         })
     }
 
-
     private fun setupButtonListener() {
+        val authenActivity = getAuthenActivity()
         binding.btnLogin.setOnClickListener {
+            hideKeyboard()
             //need validate email and password before sign in
             if (!isValidEmail(binding.edEmailLogin.text.toString())) {
                 setEmailLayoutError(true)
@@ -78,11 +80,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         }
 
         binding.btnSignUp.setOnClickListener {
-            if (activity != null && activity is AuthenActivity)
-                (activity as AuthenActivity).addFragment(
-                    SignupFragment(),
-                    R.id.authenFragmentContainer
-                )
+            hideKeyboard()
+            authenActivity?.addFragment(SignupFragment(), R.id.authenFragmentContainer)
         }
     }
 

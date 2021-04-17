@@ -9,12 +9,21 @@
     <dimen name="text_size_xxxlarge">22sp</dimen>
     <dimen name="text_size_huge">65sp</dimen>
 
-    <dimen name="space_small">2sp</dimen>
-    <dimen name="space_normal">4sp</dimen>
-    <dimen name="space_large">6sp</dimen>
-    <dimen name="space_xlarge">8sp</dimen>
-    <dimen name="space_xxlarge">10sp</dimen>
-    <dimen name="space_xxxlarge">12sp</dimen>
+    <dimen name="space_small">2dp</dimen>
+    <dimen name="space_normal">4dp</dimen>
+    <dimen name="space_large">6dp</dimen>
+    <dimen name="space_xlarge">8dp</dimen>
+    <dimen name="space_xxlarge">10dp</dimen>
+    <dimen name="space_xxxlarge">12dp</dimen>
+
+    <dimen name="padding_small">12dp</dimen>
+    <dimen name="padding_xsmall">14dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_large">18dp</dimen>
+    <dimen name="padding_xlarge">20dp</dimen>
+    <dimen name="padding_xxlarge">22dp</dimen>
+    <dimen name="padding_xxxlarge">24dp</dimen>
 
     <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="dialog_error_size">300dp</dimen>
 </resources>

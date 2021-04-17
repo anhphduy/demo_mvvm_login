@@ -1,15 +1,17 @@
 package com.example.demologinmvvm.ui.authentication.signup
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
+import com.example.demologinmvvm.ui.home.MainActivity
 import com.example.demologinmvvm.R
 import com.example.demologinmvvm.base.BaseFragment
 import com.example.demologinmvvm.common.DataResult
 import com.example.demologinmvvm.databinding.FragmentSignupBinding
 import com.example.demologinmvvm.di.injectViewModel
 import com.example.demologinmvvm.utils.Utils
+import com.example.demologinmvvm.utils.hideKeyboard
 
 class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
     override fun injectViewModel() {
@@ -30,25 +32,25 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
 
     private fun observeResultSignup() {
         viewModel.moveCommand.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            val authenActivity = getAuthenActivity() ?: return@Observer
             when (it.status) {
                 DataResult.Status.SUCCESS -> {
+                    authenActivity.dismissProgress()
                     if (it.data != null && it.data) {
-                        Toast.makeText(requireContext(), "dang ky thanh cong", Toast.LENGTH_SHORT)
-                            .show()
-                    } else {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        //sign up success
+                        startActivity( Intent(authenActivity, MainActivity::class.java))
                     }
-                    //hide loading indicator + handle data
                 }
 
                 DataResult.Status.LOADING -> {
                     //show loading indicator
-                    Toast.makeText(requireContext(), "loading", Toast.LENGTH_SHORT).show()
+                    authenActivity.showProgress()
                 }
 
                 DataResult.Status.ERROR -> {
                     //hide loading indicator + show error
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    authenActivity.dismissProgress()
+                    authenActivity.showErrorDialog(it.message ?: getString(R.string.common_error))
                 }
             }
         })
@@ -56,6 +58,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
 
     private fun setupButtonListener() {
         binding.btnCreate.setOnClickListener {
+            hideKeyboard()
             //need validate user name, email and password before create new account
             if (binding.edFullNameSignup.text.toString().isEmpty()) {
                 setFullNameLayoutError(true)

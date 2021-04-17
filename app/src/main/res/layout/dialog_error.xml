@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_error_size"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/padding_xxxlarge"
+    android:paddingBottom="@dimen/padding_small"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/bg_border_dialog"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_xxxlarge"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_xxxlarge"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textColor="@color/black" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/padding_xxxlarge"
+        android:background="@color/gray_200" />
+
+    <TextView
+        android:id="@+id/btnYes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="@dimen/padding_small"
+        android:background="@android:color/white"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        android:text="@string/ok"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
+</LinearLayout>

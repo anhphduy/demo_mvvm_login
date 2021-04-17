@@ -8,11 +8,13 @@ import com.example.demologinmvvm.data.model.User
 import com.example.demologinmvvm.utils.LOGIN_USER_KEY
 import com.example.demologinmvvm.utils.PreferenceHelper
 import com.example.demologinmvvm.utils.ResourceUtils
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AuthenRepositoryImpl @Inject constructor(private val dao: UserDao) : AuthenRepository {
+    // repository: where you get data from local or remote and implement business logic
 
     override suspend fun login(email: String, password: String): DataResult<Boolean?> {
         // In this demo we will get data from local.
@@ -20,13 +22,15 @@ class AuthenRepositoryImpl @Inject constructor(private val dao: UserDao) : Authe
         return try {
             //Get user from local database
             val user = dao.loadUser(email, password)
+            //delay 2 second to see demo loading view, if don't like it, remove it
+            delay(2000)
             //check if has user, save it to shared preference and return result success
             if (user != null) {
                 PreferenceHelper.putObject(LOGIN_USER_KEY, user)
                 DataResult.success(data = true)
             } else
             // if not have user, return result fail
-                DataResult.success(message = ResourceUtils.getString(R.string.login_error), data = false)
+                DataResult.error(message = ResourceUtils.getString(R.string.login_error), data = false)
         } catch (e: Exception) {
             // if it has error, return result fail
             DataResult.error(
@@ -44,9 +48,11 @@ class AuthenRepositoryImpl @Inject constructor(private val dao: UserDao) : Authe
         return try {
             //Try to load user to check if it exist
             val userAccount = dao.loadUserByEmail(email)
+            //delay 2 second to see demo loading view, if don't like it, remove it
+            delay(2000)
             if (userAccount != null) {
                 // it existed, return result false with message
-                DataResult.success(message = ResourceUtils.getString(R.string.account_exist), data = false)
+                DataResult.error(message = ResourceUtils.getString(R.string.account_exist), data = false)
             } else {
                 //if not exist, save to local
                 val newUser = User(fullName, email, password)

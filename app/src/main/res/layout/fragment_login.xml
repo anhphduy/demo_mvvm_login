@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background1"
+        android:background="@color/white"
         android:clickable="true"
         android:focusable="true">
 
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_xxlarge"
             android:layout_marginTop="@dimen/space_xxxlarge"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bg_boder_button"
             android:padding="@dimen/space_xlarge"
             android:text="@string/log_in"
             android:textColor="@color/white"
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_xxlarge"
             android:layout_marginTop="@dimen/space_xxxlarge"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bg_boder_button"
             android:padding="@dimen/space_xlarge"
             android:text="@string/sign_up"
             android:textColor="@color/white"

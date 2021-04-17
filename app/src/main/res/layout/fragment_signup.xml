@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_xxlarge"
             android:layout_marginTop="@dimen/space_xxxlarge"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bg_boder_button"
             android:padding="@dimen/space_xlarge"
             android:text="@string/create"
             android:textColor="@color/white"

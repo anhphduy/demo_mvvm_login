@@ -23,5 +23,9 @@ class AuthenActivity : BaseActivity<ActivityAuthenBinding, AuthenViewModel>() {
     private fun openLoginScreen() {
         //add login fragment to the frame
         replaceFragment(LoginFragment(), R.id.authenFragmentContainer, addToBackStack = false)
+        binding.authenFragmentContainer
+    }
+
+    override fun initViewModel(viewModelCallbackManager: AuthenViewModel) {
     }
 }

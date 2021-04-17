@@ -1,6 +1,6 @@
 package com.example.demologinmvvm.di.module
 
-import com.example.demologinmvvm.MainActivity
+import com.example.demologinmvvm.ui.home.MainActivity
 import com.example.demologinmvvm.ui.authentication.AuthenActivity
 import com.example.demologinmvvm.ui.splash.SplashActivity
 import dagger.Module

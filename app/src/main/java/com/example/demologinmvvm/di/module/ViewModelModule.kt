@@ -7,6 +7,8 @@ import com.example.demologinmvvm.di.factory.ViewModelFactory
 import com.example.demologinmvvm.ui.authentication.AuthenViewModel
 import com.example.demologinmvvm.ui.authentication.login.LoginViewModel
 import com.example.demologinmvvm.ui.authentication.signup.SignupViewModel
+import com.example.demologinmvvm.ui.home.MainViewModel
+import com.example.demologinmvvm.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -30,4 +32,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SignupViewModel::class)
     internal abstract fun providesSignupViewModel(viewModel: SignupViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashViewModel::class)
+    internal abstract fun providesSplashViewModel(viewModel: SplashViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    internal abstract fun providesHomeViewModel(viewModel: MainViewModel): ViewModel
 }
