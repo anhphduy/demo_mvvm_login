@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">DemoLoginMVVM</string>
+
+    //common
+    <string name="or">OR</string>
+    <string name="hello">Hello</string>
+
+    //authen
+    <string name="log_in">Login</string>
+    <string name="login_content">Login to your account</string>
+    <string name="sign_up">Create new account</string>
+    <string name="create">Create</string>
+    <string name="email">Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="full_name_error">Please enter your full name</string>
+    <string name="email_error">Please enter a valid email address</string>
+    <string name="password">Password</string>
+    <string name="password_error">Password must be at least 6 characters</string>
+
+    //error
+    <string name="common_error">Error Occurred!</string>
+    <string name="login_error">The user name or password is incorrect</string>
+    <string name="account_exist">Account already exists</string>
+
+    //main
+    <string name="hello_user">Hello, %s</string>
+    <string name="log_out">Logout</string>
+    <string name="log_out_message">Do you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+</resources>
