@@ -20,10 +20,12 @@ class AuthenActivity : BaseActivity<ActivityAuthenBinding, AuthenViewModel>() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_authen
 
+    /**
+     * function to open login screen as first screen
+     */
     private fun openLoginScreen() {
-        //add login fragment to the frame
+        //replace login fragment to the frame
         replaceFragment(LoginFragment(), R.id.authenFragmentContainer, addToBackStack = false)
-        binding.authenFragmentContainer
     }
 
     override fun initViewModel(viewModelCallbackManager: AuthenViewModel) {

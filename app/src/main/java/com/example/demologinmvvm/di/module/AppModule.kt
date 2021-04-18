@@ -11,7 +11,9 @@ import com.example.demologinmvvm.data.repository.UserRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
-
+/**
+ * Module declare app provider inject object
+ */
 @Module
 class AppModule {
     @Provides

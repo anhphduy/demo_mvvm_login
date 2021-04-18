@@ -12,6 +12,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val userRepository: UserRepository) :
     BaseViewModel() {
 
+    //auto bind userName to view
     var userName: String = ""
         @Bindable get
         set(value) {
@@ -21,6 +22,9 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
             notifyPropertyChanged(BR.userName)
         }
 
+    /**
+     * function to call getCurrentLoginUser function from repository to get current log in user then bind data to view
+     */
     fun getCurrentUserLogin() {
         val user = userRepository.getCurrentLoginUser()
         userName = user?.fullName ?: ""

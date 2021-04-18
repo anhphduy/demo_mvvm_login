@@ -30,6 +30,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
         observeResultSignup()
     }
 
+    /**
+     * function to observe resultSignUp and handle it if resultSignUp changes status
+     */
     private fun observeResultSignup() {
         viewModel.moveCommand.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             val authenActivity = getAuthenActivity() ?: return@Observer
@@ -56,6 +59,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
         })
     }
 
+    /**
+     * function to setup to handle user button click event
+     */
     private fun setupButtonListener() {
         binding.btnCreate.setOnClickListener {
             hideKeyboard()
@@ -80,10 +86,14 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
             } else {
                 setPasswordLayoutError(false)
             }
+            // if user's information is validated, call function to signUp
             viewModel.signUp()
         }
     }
 
+    /**
+     * function setup to listen text input changed event
+     */
     private fun setupTextInputWatcher() {
         binding.edFullNameSignup.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -93,6 +103,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
             }
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //validate user's fullName and show error if it is invalid
                 setFullNameLayoutError(text.isNullOrEmpty())
             }
         })
@@ -105,6 +116,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
             }
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //validate email and show error if it is invalid
                 setEmailLayoutError(!Utils.isValidEmail(text.toString()))
             }
         })
@@ -117,11 +129,15 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
             }
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //validate password and show error if it is invalid
                 setPasswordLayoutError(!Utils.isValidPassword(text.toString()))
             }
         })
     }
 
+    /**
+     * function to show/hide error for email
+     */
     private fun setEmailLayoutError(hasError: Boolean) {
         binding.apply {
             tILEmailSignup.error = if (hasError) getString(R.string.email_error) else ""
@@ -129,6 +145,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
         }
     }
 
+    /**
+     * function to show/hide error for password
+     */
     private fun setPasswordLayoutError(hasError: Boolean) {
         binding.apply {
             tILPasswordSignup.error = if (hasError) getString(R.string.password_error) else ""
@@ -136,6 +155,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding, SignupViewModel>() {
         }
     }
 
+    /**
+     * function to show/hide error for fullName
+     */
     private fun setFullNameLayoutError(hasError: Boolean) {
         binding.apply {
             tILFullNameSignup.error = if (hasError) getString(R.string.full_name_error) else ""

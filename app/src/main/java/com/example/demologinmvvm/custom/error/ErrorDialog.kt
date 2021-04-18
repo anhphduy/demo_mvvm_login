@@ -10,6 +10,9 @@ import android.view.Window
 import com.example.demologinmvvm.R
 import kotlinx.android.synthetic.main.dialog_error.*
 
+/**
+ * Custom dialog error that show message error
+ */
 class ErrorDialog(
     context: Context,
     private val title: String,

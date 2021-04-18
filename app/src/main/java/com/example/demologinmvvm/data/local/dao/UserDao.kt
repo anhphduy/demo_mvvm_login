@@ -3,6 +3,9 @@ package com.example.demologinmvvm.data.local.dao
 import androidx.room.*
 import com.example.demologinmvvm.data.model.User
 
+/**
+ * declare ROOM User data access object
+ */
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

@@ -8,6 +8,9 @@ import com.example.demologinmvvm.data.local.dao.UserDao
 import com.example.demologinmvvm.data.model.User
 import com.example.demologinmvvm.utils.DATABASE_NAME
 
+/**
+ * Class for building Demo Room Database
+ */
 @Database(entities = [User::class], version = 1, exportSchema = false)
 abstract class DemoDatabase : RoomDatabase() {
 

@@ -16,6 +16,9 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val repository: AuthenRepository) :
     BaseViewModel() {
+    /**
+     * email will auto get data from view
+     */
     var email: String = ""
         @Bindable get
         set(value) {
@@ -25,6 +28,9 @@ class LoginViewModel @Inject constructor(private val repository: AuthenRepositor
             notifyPropertyChanged(BR.email)
         }
 
+    /**
+     * password will get data from view
+     */
     var password: String = ""
         @Bindable get
         set(value) {
@@ -34,20 +40,33 @@ class LoginViewModel @Inject constructor(private val repository: AuthenRepositor
             notifyPropertyChanged(BR.password)
         }
 
+    /**
+     * data result for login function
+     */
     private val _moveCommand = MutableLiveData<DataResult<Boolean?>>()
     val moveCommand: LiveData<DataResult<Boolean?>>
         get() = _moveCommand
 
+    /**
+     * set data result for login function
+     */
     private fun setResultLogin(result: DataResult<Boolean?>) {
+        //notify login result changed
         _moveCommand.postValue(result)
     }
 
+    /**
+     * function handle login function with coroutines
+     */
     fun login() {
         viewModelScope.launch(Dispatchers.IO) {
+            // set status for login result is loading
             setResultLogin(DataResult.loading())
             try {
+                // notify login result with result returned from repository
                 setResultLogin(repository.login(email, password))
             } catch (exception: Exception) {
+                // set status for result is error
                 setResultLogin(
                     DataResult.error(
                         data = null,

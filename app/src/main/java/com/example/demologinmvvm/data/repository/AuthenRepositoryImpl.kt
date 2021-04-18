@@ -12,10 +12,16 @@ import kotlinx.coroutines.delay
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Implement functions of AuthenRepository here and handle logic for authentication
+ */
 @Singleton
-class AuthenRepositoryImpl @Inject constructor(private val dao: UserDao) : AuthenRepository {
+class AuthenRepositoryImpl(private val dao: UserDao) : AuthenRepository {
     // repository: where you get data from local or remote and implement business logic
 
+    /**
+     * Function handle login with email and password
+     */
     override suspend fun login(email: String, password: String): DataResult<Boolean?> {
         // In this demo we will get data from local.
         // If get data from servers, implement Retrofit2, inject data source from remote and call api to get data
@@ -40,6 +46,9 @@ class AuthenRepositoryImpl @Inject constructor(private val dao: UserDao) : Authe
         }
     }
 
+    /**
+     * Function handle to create a new account
+     */
     override suspend fun signUp(
         fullName: String,
         email: String,
@@ -71,5 +80,8 @@ class AuthenRepositoryImpl @Inject constructor(private val dao: UserDao) : Authe
         }
     }
 
+    /**
+     * Function handle to get all user from local database
+     */
     override suspend fun getAllUser(): List<User>? = dao.getAllUser()
 }

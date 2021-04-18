@@ -31,6 +31,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         observeResultLogin()
     }
 
+    /**
+     * function to observe resultLogin and handle it if resultLogin changes status
+     */
     private fun observeResultLogin() {
         viewModel.moveCommand.observe(viewLifecycleOwner, Observer {
             val authenActivity = getAuthenActivity() ?: return@Observer
@@ -58,6 +61,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         })
     }
 
+    /**
+     * function to setup to handle user button click event
+     */
     private fun setupButtonListener() {
         val authenActivity = getAuthenActivity()
         binding.btnLogin.setOnClickListener {
@@ -76,15 +82,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             } else {
                 setPasswordLayoutError(false)
             }
+            // if email and password validated, call function to login
             viewModel.login()
         }
 
+        // click button signUp to go to SignUp screen
         binding.btnSignUp.setOnClickListener {
             hideKeyboard()
             authenActivity?.addFragment(SignupFragment(), R.id.authenFragmentContainer)
         }
     }
 
+    /**
+     * function setup to listen text input changed event
+     */
     private fun setupTextInputWatcher() {
         binding.edEmailLogin.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -96,6 +107,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (text == null)
                     return
+                //validate email and show error if it is invalid
                 setEmailLayoutError(!isValidEmail(text.toString()))
             }
         })
@@ -110,11 +122,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (text == null)
                     return
+                //validate password and show error if it is invalid
                 setPasswordLayoutError(!isValidPassword(text.toString()))
             }
         })
     }
 
+    /**
+     * function to show/hide error for email
+     */
     private fun setEmailLayoutError(hasError: Boolean) {
         binding.apply {
             tILEmailLogin.error = if (hasError) getString(R.string.email_error) else ""
@@ -122,6 +138,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         }
     }
 
+    /**
+     * function to show/hide error for password
+     */
     private fun setPasswordLayoutError(hasError: Boolean) {
         binding.apply {
             tILPasswordLogin.error = if (hasError) getString(R.string.password_error) else ""

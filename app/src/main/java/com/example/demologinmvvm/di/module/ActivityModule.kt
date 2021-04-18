@@ -6,6 +6,9 @@ import com.example.demologinmvvm.ui.splash.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
+/**
+ * Module declare Activities that is AndroidInjector
+ */
 @Module
 abstract class ActivityModule {
     @ContributesAndroidInjector
