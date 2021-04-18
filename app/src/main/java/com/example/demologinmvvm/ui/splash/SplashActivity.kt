@@ -24,6 +24,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_splash
 
+    /**
+     * function to observe result for hadLogin to navigate
+     */
     private fun observeHadLogin() {
         // if had login, go to main screen, if not, go to login screen
         viewModel.moveCommand.observe(this, Observer { hadLogin ->
@@ -36,6 +39,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         })
     }
 
+    /**
+     * function to setup showing time for splash screen
+     */
     private fun setupSplashTime() {
         // show splash screen for 2 seconds
         Handler(Looper.getMainLooper()).postDelayed(Runnable {

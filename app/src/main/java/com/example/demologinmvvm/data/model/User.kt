@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey
 import com.example.demologinmvvm.utils.USER_TABLE_NAME
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Class for User object and create user table for Room database
+ */
 @Entity(
     tableName = USER_TABLE_NAME,
     indices = [Index(value = ["email"], unique = true)]

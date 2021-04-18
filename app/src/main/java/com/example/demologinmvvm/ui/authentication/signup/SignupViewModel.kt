@@ -17,6 +17,9 @@ import javax.inject.Inject
 
 class SignupViewModel @Inject constructor(private val repository: AuthenRepository) :
     BaseViewModel() {
+    /**
+     * fullNameSignup will auto get data from view
+     */
     var fullNameSignup: String = ""
         @Bindable get
         set(value) {
@@ -26,6 +29,9 @@ class SignupViewModel @Inject constructor(private val repository: AuthenReposito
             notifyPropertyChanged(BR.fullNameSignup)
         }
 
+    /**
+     * emailSignup will auto get data from view
+     */
     var emailSignup: String = ""
         @Bindable get
         set(value) {
@@ -35,6 +41,9 @@ class SignupViewModel @Inject constructor(private val repository: AuthenReposito
             notifyPropertyChanged(BR.emailSignup)
         }
 
+    /**
+     * passwordSignup will auto get data from view
+     */
     var passwordSignup: String = ""
         @Bindable get
         set(value) {
@@ -48,16 +57,25 @@ class SignupViewModel @Inject constructor(private val repository: AuthenReposito
     val moveCommand: LiveData<DataResult<Boolean?>>
         get() = _moveCommand
 
+    /**
+     * set data result for signUp function
+     */
     private fun setResultUserSignup(result: DataResult<Boolean?>) {
         _moveCommand.postValue(result)
     }
 
+    /**
+     * function handle signUp function with coroutines
+     */
     fun signUp() {
         viewModelScope.launch(Dispatchers.IO) {
+            // set status for login result is loading
             setResultUserSignup(DataResult.loading())
             try {
+                // notify signUp result with result returned from repository
                 setResultUserSignup(repository.signUp(fullNameSignup, emailSignup, passwordSignup))
             } catch (exception: Exception) {
+                // set status for result is error
                 setResultUserSignup(
                     DataResult.error(
                         data = null,

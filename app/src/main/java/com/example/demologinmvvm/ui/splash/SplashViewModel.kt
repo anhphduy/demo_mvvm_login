@@ -13,6 +13,9 @@ class SplashViewModel @Inject constructor(private val userRepository: UserReposi
     val moveCommand: LiveData<Boolean>
         get() = _moveCommand
 
+    /**
+     * function to call hadLoginUser function from repository to check login user then navigate
+     */
     fun navigate() {
         _moveCommand.value = userRepository.hadLoginUser()
     }

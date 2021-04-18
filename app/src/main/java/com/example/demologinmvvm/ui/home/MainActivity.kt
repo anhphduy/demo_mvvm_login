@@ -31,11 +31,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_main
 
+    /**
+     * function to setup to handle user button click event
+     */
     private fun setupButtonClick() {
+        // handle event user click button logout
         btnLogout.setOnClickListener {
             val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
                 when (which) {
                     DialogInterface.BUTTON_POSITIVE -> {
+                        // dismiss dialog, then clear task, then open AuthenActivity as first screen, then clear SharedPreference's data
                         dialog.dismiss()
                         val intent = Intent(this, AuthenActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -43,11 +48,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                         PreferenceHelper.clear()
                     }
                     DialogInterface.BUTTON_NEGATIVE -> {
+                        // if not, just dismiss dialog
                         dialog.dismiss()
                     }
                 }
             }
 
+            // build a dialog that show message to ask user want to logout or not
             val builder = AlertDialog.Builder(this)
             builder.setMessage(getString(R.string.log_out_message)).setPositiveButton(getString(
                 R.string.yes

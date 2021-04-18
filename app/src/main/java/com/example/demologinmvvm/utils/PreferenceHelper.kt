@@ -5,6 +5,9 @@ import androidx.preference.PreferenceManager
 import com.example.demologinmvvm.DemoApplication
 import com.google.gson.Gson
 
+/**
+ * Class to provide functions to use SharedPreferences
+ */
 object PreferenceHelper {
 
     private fun defaultPrefs(): SharedPreferences =

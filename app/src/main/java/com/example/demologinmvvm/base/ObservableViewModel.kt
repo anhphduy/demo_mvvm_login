@@ -4,6 +4,9 @@ import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.ViewModel
 
+/**
+ * Base for ViewModel to auto notify when property changed
+ */
 open class ObservableViewModel : ViewModel(), Observable {
 
     private val callbacks: PropertyChangeRegistry by lazy { PropertyChangeRegistry() }

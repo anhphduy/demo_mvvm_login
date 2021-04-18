@@ -13,6 +13,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
+/**
+ * Module declare viewModel Inject object
+ */
+
 @Module
 abstract class ViewModelModule {
     @Binds

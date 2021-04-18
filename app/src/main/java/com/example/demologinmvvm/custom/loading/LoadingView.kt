@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.demologinmvvm.R
 
+/**
+ * Custom loading view with process bar and can add function to change loading message
+ */
 class LoadingView {
     companion object {
         private var dialog: AlertDialog? = null

@@ -16,17 +16,41 @@ import javax.inject.Inject
 
 abstract class BaseFragment<B : ViewDataBinding, V : ViewModel> : DaggerDialogFragment() {
 
+    /**
+     * Inject ViewModel factory, which will be used to instantiate
+     *              new ViewModels
+     */
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    /**
+     * private variable for binding variable
+     */
     private lateinit var mViewDataBinding: B
+
+    /**
+     * private variable for viewModel variable
+     */
     protected lateinit var mViewModel: V
 
+    /**
+     * variable for get view data binding
+     */
     val binding: B get() = mViewDataBinding
+
+    /**
+     * variable to get instance of viewModel
+     */
     val viewModel: V get() = mViewModel
 
+    /**
+     * function to inject viewModel for each screen
+     */
     abstract fun injectViewModel()
 
+    /**
+     * function to init binding viewModel
+     */
     abstract fun initViewModel(viewModelCallbackManager: V)
 
     @LayoutRes
@@ -62,9 +86,15 @@ abstract class BaseFragment<B : ViewDataBinding, V : ViewModel> : DaggerDialogFr
         onViewReady(savedInstanceState)
     }
 
+    /**
+     * function to that will be called after setup everything
+     */
     abstract fun onViewReady(bundle: Bundle?)
 
-    fun getAuthenActivity() : AuthenActivity? {
-        return  if (activity is AuthenActivity) activity as AuthenActivity else null
+    /**
+     * function to get AuthenActivity from fragment that show in AuthenActivity
+     */
+    fun getAuthenActivity(): AuthenActivity? {
+        return if (activity is AuthenActivity) activity as AuthenActivity else null
     }
 }
